@@ -1,0 +1,23 @@
+{
+  "name": "trb_tst",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "myApp.js",
+  "scripts": {
+    "start": "node myApp.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tacostrophe/trb_tst.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "tacostrophe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tacostrophe/trb_tst/issues"
+  },
+  "homepage": "https://github.com/Tacostrophe/trb_tst#readme"
+}
