@@ -9,10 +9,11 @@ async function createRecord(db, name, dateOfBirth, gender, ...args) {
     process.exit(1);
   }
   try {
-    const newRecord = db.query(
+    const newRecord = await db.query(
       `INSERT INTO profiles (name, date_of_birth, gender) VALUES ($1, $2, $3) RETURNING *;`,
       [name, dateOfBirth, gender.toUpperCase()],
     );
+    return newRecord.rows;
   } catch (error) {
     throw error;
   }
