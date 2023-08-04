@@ -30,7 +30,7 @@ dotenv.config();
     user: process.env.PGUSER ?? 'postgres',
     password: process.env.PGPASSWORD ?? 'root',
     port: process.env.PGPORT ?? 5432,
-    database: 'my_app_db',
+    database: process.env.DATABASE ?? 'my_app_db',
   });
 
   const result = await apps[appNum](pool, ...args);
