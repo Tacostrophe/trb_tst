@@ -3,21 +3,37 @@ const createRecord = require('./apps/createRecord/createRecord');
 const createTable = require('./apps/createTable/createTable');
 const getAllUnique = require('./apps/getAllUnique/getAllUnique');
 const getFiltered = require('./apps/getFiltered/getFiltered');
+const { Pool } = require('pg');
+const dotenv = require('dotenv');
 
-if (process.argv.length <= 2) {
-  console.error('Exptected at least one argument');
-  process.exit(1);
-}
+dotenv.config();
 
-const appNum = process.argv[2];
-const args = process.argv.slice(3);
+(async function() {
+  if (process.argv.length <= 2) {
+    console.error('Exptected at least one argument');
+    process.exit(1);
+  }
 
-const apps = {
-  1: createTable,
-  2: createRecord,
-  3: getAllUnique,
-  4: autoFill,
-  5: getFiltered
-};
+  const appNum = process.argv[2];
+  const args = process.argv.slice(3);
 
-apps[appNum](...args);
+  const apps = {
+    1: createTable,
+    2: createRecord,
+    3: getAllUnique,
+    4: autoFill,
+    5: getFiltered
+  };
+
+  const pool = new Pool({
+    host: process.env.HOST ?? 'localhost',
+    user: process.env.PGUSER ?? 'postgres',
+    password: process.env.PGPASSWORD ?? 'root',
+    port: process.env.PGPORT ?? 5432,
+    database: 'my_app_db',
+  });
+
+  const result = await apps[appNum](pool, ...args);
+  console.log(result ?? 'success');
+  pool.end();
+})();
