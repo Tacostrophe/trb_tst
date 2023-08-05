@@ -15,7 +15,8 @@ async function createRecord(db, name, dateOfBirth, gender, ...args) {
     );
     return newRecord.rows;
   } catch (error) {
-    throw error;
+    console.error(error.stack);
+    process.exit(1);
   }
 };
   
