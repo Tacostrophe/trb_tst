@@ -13,10 +13,10 @@ async function createTable(db, ...args) {
   } catch (error) {
     if (error.code === '42P07') { //42P07 - код ошибки duplicate_table
       console.error('Table already exists');
-      process.exit(1);
     } else {
-      throw error;
+      console.error(error.stack);
     }
+    process.exit(1);
   }
 
 };
