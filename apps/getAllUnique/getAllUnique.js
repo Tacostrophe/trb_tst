@@ -17,7 +17,8 @@ async function getAllUnique(db, ...args) {
     )
     return result.rows;
   } catch (error) {
-    throw error;
+    console.error(error.stack);
+    process.exit(1);
   }
 };
 
